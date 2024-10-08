@@ -6,16 +6,21 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
+/**
+ * author: Becca Biukoto
+ * date: 10/07/2024
+ */
 
-//@author Becca Biukoto
-// date: 09/22/2024
 public class MainActivity extends AppCompatActivity {
     private Flower flower;
     private SeekBar redSeekBar;
     private SeekBar greenSeekBar;
     private SeekBar blueSeekBar;
     private TextView textView;
+
+    /**
+     * register listeners with view
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,13 @@ public class MainActivity extends AppCompatActivity {
         blueSeekBar = findViewById(R.id.blueSeekBar); // blue seek bar
         textView = findViewById(R.id.element); // textview change
 
+
+        //Register the controller with the views it's listening (Step 3)
+        FlowerController fc = new FlowerController(flower, textView, redSeekBar, greenSeekBar, blueSeekBar);
+        flower.setOnTouchListener(fc);
+        redSeekBar.setOnSeekBarChangeListener(fc);
+        greenSeekBar.setOnSeekBarChangeListener(fc);
+        blueSeekBar.setOnSeekBarChangeListener(fc);
 
     }
 
